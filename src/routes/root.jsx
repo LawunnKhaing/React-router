@@ -1,6 +1,5 @@
 import {
     Outlet,
-    Link,
     NavLink,
     useLoaderData,
     Form,
@@ -58,17 +57,13 @@ export default function Root() {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                    <NavLink
-                    to={`contacts/${contact.id}`}
-                    className={({ isActive, isPending }) =>
+                  <NavLink to={`contacts/${contact.id}`} className={({ isActive, isPending }) =>
                       isActive
                         ? "active"
                         : isPending
                         ? "pending"
                         : ""
-                    }
-                  >
-                  <Link to={`contacts/${contact.id}`}>
+                    }>
                     {contact.first || contact.last ? (
                       <>
                         {contact.first} {contact.last}
@@ -77,8 +72,7 @@ export default function Root() {
                       <i>No Name</i>
                     )}{" "}
                     {contact.favorite && <span>★</span>}
-                  </Link>
-                    </NavLink>
+                  </NavLink>
                 </li>
               ))}
             </ul>
