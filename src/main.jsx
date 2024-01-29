@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import ErrorPage from './error-page';
-import Contact from './routes/contact';
+import Contact,{
+  loader as contactLoader,
+} from './routes/contact';
+
 import Root, { 
   loader as rootLoader,
   action as rootAction,
+  action,
  } from "./routes/root";
 
 import{
@@ -13,6 +17,10 @@ import{
 }from "react-router-dom";
 import "./index.css";
 
+import EditContact, {
+  action as editAction,
+}
+ from './routes/edit';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +32,13 @@ const router = createBrowserRouter([
       {
         path: "contacts/:contactId",
         element: <Contact />,
+        loader: contactLoader,
+      },
+      {
+        path: "contacts/:contactId/edit",
+        element: <EditContact />,
+        loader: contactLoader,
+        action: editAction,
       },
     ],
   },
