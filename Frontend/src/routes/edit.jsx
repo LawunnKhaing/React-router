@@ -5,6 +5,9 @@ import {
      useNavigate,
      } from "react-router-dom";
 import { updateContact } from "../contacts";
+import axios from "axios";
+import qs from "qs";
+
 
 export async function action({ request, params }) {
     const formData = await request.formData();
@@ -13,6 +16,13 @@ export async function action({ request, params }) {
     const updates = Object.fromEntries(formData);
     updates.first;
     updates.last;
+
+    const data = qs.stringify(updates);
+    await axios
+      .post("http://localhost:3000/api/contact", data)
+      .then (response => {
+        console.log(response);
+      })
     await updateContact(params.contactId, updates);
     return redirect(`/contacts/${params.contactId}`);
   }
